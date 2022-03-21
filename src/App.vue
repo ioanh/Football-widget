@@ -26,15 +26,15 @@ export default {
     getData('https://enet-test.s3.eu-west-1.amazonaws.com/data_structure.json').then(data => {
        Object.entries(data.data).forEach(el => {
          this.orderedData.push(el[1]);
+         this.formatData(this.orderedData)
        })
     });
-    console.log(this.orderedData)
   },
   methods: {
     formatData(data) {
-      /*
-          Formats the widget's data
-      */
+      data.sort(function(a, b) {
+        return new Date(a.start_date) - new Date(b.start_date);
+      });
     },
   }
 }
